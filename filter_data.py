@@ -58,8 +58,16 @@ def popular_trip(filter):
     mode_trip = new_df['trip'].mode()[0]
     print("\nTrip: ", mode_trip, ", Count: ", (new_df.trip.values == mode_trip).sum(), "\nFilter :" ,filter)
 
-city = input("Choose city among chicago, new york or washington : ")
-flag = input("Would you like to filter the data by month, day, both or none? ")
+def user(filter):
+    print("\n**************\nCalculating next stats... Gender:")
+    print("\nMale: ", (new_df.Gender.values == 'Male').sum(), "\nFemale: ", (new_df.Gender.values == 'Female').sum(),"\nSubscribers: ", (new_df['User Type'].values == 'Subscriber').sum(),"\nCustomer: ", (new_df['User Type'].values == 'Customer').sum(),"\nFilter :" ,filter)
+    print("\n**************\nCalculating next stats... Year of Birth:")
+    print("\nEldest user: ", new_df['Birth Year'].min())
+    print("Most recent user: ", new_df['Birth Year'][new_df['Start Time'] == new_df['Start Time'].min()].values)
+    print("Most common year of birth: ", new_df['Birth Year'].mode()[0])
+
+city = input("\nChoose city among chicago, new york or washington : ")
+flag = input("\nWould you like to filter the data by month, day, both or none? ")
 
 if flag == 'month':
     month = input("Which month january, february, march, april, may or june? ")
@@ -68,6 +76,7 @@ if flag == 'month':
     trip(flag)
     station(flag)
     popular_trip(flag)
+    user(flag)
     
 elif flag == 'day':
     day = input("Which day sunday, monday, tuesday, wednesday, thursday, friday, saturday or sunday? ")
@@ -76,6 +85,7 @@ elif flag == 'day':
     trip(flag)
     station(flag)
     popular_trip(flag)
+    user(flag)
     
 elif flag == 'both':
     month = input("Which month january, february, march, april, may or june? ")
@@ -85,6 +95,7 @@ elif flag == 'both':
     trip(flag)
     station(flag)
     popular_trip(flag)
+    user(flag)
     
 elif flag == 'none':
     new_df = load_data(city, 'all', 'all')
@@ -92,6 +103,7 @@ elif flag == 'none':
     trip(flag)
     station(flag)
     popular_trip(flag)
+    user(flag)
     
 else :
     print("Please provide a valid input...")
