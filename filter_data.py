@@ -53,6 +53,11 @@ def station(filter):
     mode_end = new_df['End Station'].mode()[0]
     print("\nStart Station : ",mode_start,", Count : ",(new_df['Start Station'].values == mode_start).sum(),"\nEnd Station : ",mode_end,", Count : ",(new_df['End Station'].values == mode_end).sum(),"\nFilter : ",filter)
 
+def popular_trip(filter):
+    print("\n**************\nCalculating next stats... Popular Trip:")
+    mode_trip = new_df['trip'].mode()[0]
+    print("\nTrip: ", mode_trip, ", Count: ", (new_df.trip.values == mode_trip).sum(), "\nFilter :" ,filter)
+
 city = input("Choose city among chicago, new york or washington : ")
 flag = input("Would you like to filter the data by month, day, both or none? ")
 
@@ -62,6 +67,7 @@ if flag == 'month':
     stats1(flag)
     trip(flag)
     station(flag)
+    popular_trip(flag)
     
 elif flag == 'day':
     day = input("Which day sunday, monday, tuesday, wednesday, thursday, friday, saturday or sunday? ")
@@ -69,6 +75,7 @@ elif flag == 'day':
     stats1(flag)
     trip(flag)
     station(flag)
+    popular_trip(flag)
     
 elif flag == 'both':
     month = input("Which month january, february, march, april, may or june? ")
@@ -77,12 +84,14 @@ elif flag == 'both':
     stats1(flag)
     trip(flag)
     station(flag)
+    popular_trip(flag)
     
 elif flag == 'none':
     new_df = load_data(city, 'all', 'all')
     stats1(flag)
     trip(flag)
     station(flag)
+    popular_trip(flag)
     
 else :
     print("Please provide a valid input...")
