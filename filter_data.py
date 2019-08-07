@@ -34,6 +34,12 @@ def load_data(city, month, day):
 
     return df
 
+def stats1(filter):
+    print("\n**************\nCalculating first statistics...")
+    mode = new_df['hour'].mode()[0] #calculates peak hour
+    n = (new_df.hour.values == mode).sum() #counts trips done in peak hour
+    print("Most popular hour: ",mode, "\nCount: ",n, "\nfilter:" ,filter)
+
 city = input("Choose city among chicago, new york or washington : ")
 flag = input("Would you like to filter the data by month, day, both or none? ")
 
@@ -41,18 +47,22 @@ flag = input("Would you like to filter the data by month, day, both or none? ")
 if flag == 'month':
     month = input("Which month january, february, march, april, may or june? ")
     new_df = load_data(city, month, 'all')
+    stats1(flag)
     
 elif flag == 'day':
     day = input("Which day sunday, monday, tuesday, wednesday, thursday, friday, saturday or sunday? ")
     new_df = load_data(city, 'all', day)
+    stats1(flag)
     
 elif flag == 'both':
     month = input("Which month january, february, march, april, may or june? ")
     day = input("Which day sunday, monday, tuesday, wednesday, thursday, friday, saturday or sunday? ")
     new_df = load_data(city, month, day)
+    stats1(flag)
     
 elif flag == 'none':
     new_df = load_data(city, 'all', 'all')
+    stats1(flag)
     
 else :
     print("Please provide a valid input...")
