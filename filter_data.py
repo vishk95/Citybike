@@ -99,5 +99,11 @@ elif flag == 'none':
 else :
     print("Please provide a valid input...")
 
+for ind in new_df.index:
+    print("\n****************************\nStart Time: ",new_df['Start Time'][ind],"\nEnd Time: ",new_df['End Time'][ind],"\nTrip Duration: ",new_df['Trip Duration'][ind],"\nStart Station: ",new_df['Start Station'][ind],"\nEnd Station: ",new_df['End Station'][ind],"\nUser Type: ",new_df['User Type'][ind],"\nGender: ",new_df['Gender'][ind],"\nBirth Year: ",new_df['Birth Year'][ind],"\n************************")
+    if ind % 5 == 0 :
+        permit = input("Do you want to see 5 more? (y/n)")
+        if permit == 'n':
+            break
 
 
